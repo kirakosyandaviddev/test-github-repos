@@ -6,7 +6,7 @@ import store from 'store2';
 
 import MainLayout from "../../layouts/MainLayout"
 import { ResultsActions } from '../../store/results/actions';
-import { pageIndexSelector, repositoriesListSelector, repositoriesLoadingSelector, textSearchSelector, totalCountSelector } from '../../store/results/selectors';
+import { pageIndexSelector, repositoriesListSelector, repositoriesLoadingSelector, textSearchSelector } from '../../store/results/selectors';
 import ScorePreview from '../../components/ScorePreview';
 import {StorageKey} from '../../consts';
 
@@ -19,7 +19,6 @@ const ResultsPage = () => {
     const pageIndex = useSelector(pageIndexSelector);
     const repositories = useSelector(repositoriesListSelector);
     const isLoading = useSelector(repositoriesLoadingSelector);
-    const totalCount = useSelector(totalCountSelector);
 
 
     useEffect(() => {
@@ -84,7 +83,7 @@ const ResultsPage = () => {
             <Space>
                 <Pagination 
                     current={pageIndex} 
-                    total={totalCount} 
+                    total={1000} 
                     pageSize={10}
                     showSizeChanger={false}  
                     onChange={(page) => dispatch(ResultsActions.setPageIndex(page))}  
