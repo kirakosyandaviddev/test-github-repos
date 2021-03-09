@@ -2,6 +2,11 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+In project I used github API for searching Repositories.
+
+# Here you can see thee App https://test-git-api.herokuapp.com/
+
+
 ## Available Scripts
 
 In the project directory, you can run:
