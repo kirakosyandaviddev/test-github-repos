@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In project I used github API for searching Repositories.
 
-# Here you can see thee App https://test-git-api.herokuapp.com/
+# Here you can see the App https://test-git-api.herokuapp.com/
 
 
 ## Available Scripts
