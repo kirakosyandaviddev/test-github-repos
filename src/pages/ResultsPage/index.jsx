@@ -7,7 +7,6 @@ import store from 'store2';
 import MainLayout from "../../layouts/MainLayout"
 import { ResultsActions } from '../../store/results/actions';
 import { pageIndexSelector, repositoriesListSelector, repositoriesLoadingSelector, textSearchSelector, totalCountSelector } from '../../store/results/selectors';
-import ScorePreview from '../../components/ScorePreview';
 import {StorageKey} from '../../consts';
 
 const { Column } = Table
@@ -54,9 +53,9 @@ const ResultsPage = () => {
                     render={(repo) => repo.owner.login} 
                 />
                 <Column 
-                    key="score" 
-                    title={'Score'} 
-                    render={(repo) => <ScorePreview count={repo.score} /> } 
+                    key="stargazers" 
+                    title={'Stargazers'} 
+                    render={(repo) => repo.stargazers_count } 
                 />
                 <Column 
                     key="link" 
