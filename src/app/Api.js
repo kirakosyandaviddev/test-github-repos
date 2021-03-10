@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'https://api.github.com/search/';
+const baseUrl = 'https://api.github.com/';
 
 const instance = axios.create({
     baseURL: baseUrl,
@@ -8,10 +8,16 @@ const instance = axios.create({
   });
 
 const Api = {
-    getRepository: (query, pageIndex = 1) => {
+    searchRepositories: (query, pageIndex = 1) => {
         return instance({
             method: 'get',
-            url: `repositories?q=${query} in:name&per_page=10&page=${pageIndex}`
+            url: `search/repositories?q=${query} in:name&per_page=10&page=${pageIndex}`
+        })
+    },
+    getRepository: (login, repoName) => {
+        return instance({
+            method: 'get',
+            url: `repos/${login}/${repoName}`
         })
     }
 }

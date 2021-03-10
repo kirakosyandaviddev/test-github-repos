@@ -17,7 +17,7 @@ export const ResultsActions = {
         dispatch(ResultsActions.getRepositoriesRequest());
 
         try {
-            const res = await Api.getRepository(query, pageIndex);
+            const res = await Api.searchRepositories(query, pageIndex);
             dispatch(ResultsActions.getRepositoriesSuccess(res.data));
         } 
         catch (e) {

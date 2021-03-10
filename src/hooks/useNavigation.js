@@ -5,7 +5,8 @@ export const useNavigation = () => {
 
     const routes = {
         home: '/',
-        results: '/results'
+        results: '/results',
+        repository: (login, repoName) => `/results/${login}/${repoName}` 
     }
 
     const navigate = (path) => {

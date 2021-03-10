@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Pagination, Space, Table } from 'antd';
 import { HeartFilled, HeartOutlined } from '@ant-design/icons';
@@ -8,12 +9,14 @@ import MainLayout from "../../layouts/MainLayout"
 import { ResultsActions } from '../../store/results/actions';
 import { pageIndexSelector, repositoriesListSelector, repositoriesLoadingSelector, textSearchSelector, totalCountSelector } from '../../store/results/selectors';
 import {StorageKey} from '../../consts';
+import { useNavigation } from '../../hooks';
 
 const { Column } = Table
 
 const ResultsPage = () => {
     const [favoriteIds, setFavoriteIds] = useState(store.get(StorageKey.favoriteRepos, []));
     const dispatch = useDispatch();
+    const { routes } = useNavigation();
     const searchValue = useSelector(textSearchSelector);
     const pageIndex = useSelector(pageIndexSelector);
     const repositories = useSelector(repositoriesListSelector);
@@ -58,13 +61,12 @@ const ResultsPage = () => {
                     render={(repo) => repo.stargazers_count } 
                 />
                 <Column 
-                    key="link" 
-                    title={'Link'} 
-                    render={(repo) => (
-                        <a href={repo.html_url} target="_blank">
-                            {repo.html_url}
-                        </a>
-                    )} 
+                    key="details" 
+                    title={'Details'} 
+                    render={(repo) => <NavLink 
+                        to={routes.repository(repo.owner.login, repo.name)}>
+                            View
+                        </NavLink>} 
                 />
                 <Column 
                     key="favorite" 
