@@ -1,34 +1,28 @@
 import React from 'react';
 import { Button, Input, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router';
 import { HomeFilled } from '@ant-design/icons';
 
-import { pageIndexSelector, textSearchSelector } from '../../store/results/selectors';
+import { textSearchSelector } from '../../store/results/selectors';
 import { ResultsActions } from '../../store/results/actions';
 import { useNavigation } from '../../hooks';
 import './SearchInput.scss'
 
-const { Search } = Input;
+const { Search } = Input; 
 
 const SearchInput = () => {
   const textSearchValue = useSelector(textSearchSelector);
-  const pageIndex = useSelector(pageIndexSelector);
   const dispatch = useDispatch();
   const { routes, navigate } = useNavigation();
-  const { pathname } = useLocation();
 
   const handleInputChange = (e) => {
     dispatch(ResultsActions.setTextSearch(e.target.value))
   };
 
   const handleSearch = () => {
-    if(textSearchValue.length > 0) {
-      dispatch(ResultsActions.getRepositories(textSearchValue, pageIndex))
-
-      if(pathname !== routes.results) {
-        navigate(routes.results);
-      }
+    if(textSearchValue.length > 0) { 
+      dispatch(ResultsActions.getRepositories(textSearchValue))
+      navigate(routes.search());
     }
   };
 
@@ -38,6 +32,7 @@ const SearchInput = () => {
        <HomeFilled />
       </Button>
       <Search
+        allowClear={true}
         placeholder="type repository name"
         enterButton="Search"
         size="large"

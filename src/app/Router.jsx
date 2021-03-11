@@ -9,7 +9,7 @@ const history = createBrowserHistory();
 
 const Routes = {
     home: '/',
-    results: '/results',
+    search: '/search/page=:page',
     repository: '/results/:login/:name'
 }
 
@@ -18,7 +18,7 @@ function Router() {
          <BrowserRouter history={history}>
             <Switch>
                 <Route exact path={Routes.home} component={HomePage} />
-                <Route exact path={Routes.results} component={ResultsPage} />
+                <Route exact path={Routes.search} component={ResultsPage} />
                 <Route path={Routes.repository} component={RepositoryPage} />
                 <Route render={() => <Redirect to={Routes.home} />} />
             </Switch>

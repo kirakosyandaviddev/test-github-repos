@@ -2,7 +2,7 @@ import { ResultsActionTypes } from "./types"
 
 
 const initialState = {
-    textSearch: '',
+    textSearch: 'react',
     pageIndex: 1,
     isLoading: false,
     list: [],

@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import Api from "../../app/Api";
 import { ResultsActionTypes } from "./types";
 
@@ -21,6 +22,7 @@ export const ResultsActions = {
             dispatch(ResultsActions.getRepositoriesSuccess(res.data));
         } 
         catch (e) {
+            message.error("Internal server error!")
             dispatch(ResultsActions.getRepositoriesError(e))
         }
     },

@@ -5,7 +5,7 @@ export const useNavigation = () => {
 
     const routes = {
         home: '/',
-        results: '/results',
+        search: (page = 1) => `/search/page=${page}`,
         repository: (login, repoName) => `/results/${login}/${repoName}` 
     }
 
@@ -23,6 +23,9 @@ export const useNavigation = () => {
 
 
     return {
-        routes,navigate,back,replace
+        routes,
+        navigate,
+        back,
+        replace
     }
 }

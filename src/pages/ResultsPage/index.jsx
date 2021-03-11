@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Pagination, Space, Table } from 'antd';
 import { HeartFilled, HeartOutlined } from '@ant-design/icons';
@@ -7,7 +7,7 @@ import store from 'store2';
 
 import MainLayout from "../../layouts/MainLayout"
 import { ResultsActions } from '../../store/results/actions';
-import { pageIndexSelector, repositoriesListSelector, repositoriesLoadingSelector, textSearchSelector, totalCountSelector } from '../../store/results/selectors';
+import { repositoriesListSelector, repositoriesLoadingSelector, textSearchSelector, totalCountSelector } from '../../store/results/selectors';
 import {StorageKey} from '../../consts';
 import { useNavigation } from '../../hooks';
 
@@ -16,12 +16,12 @@ const { Column } = Table
 const ResultsPage = () => {
     const [favoriteIds, setFavoriteIds] = useState(store.get(StorageKey.favoriteRepos, []));
     const dispatch = useDispatch();
-    const { routes } = useNavigation();
+    const { routes, navigate } = useNavigation();
     const searchValue = useSelector(textSearchSelector);
-    const pageIndex = useSelector(pageIndexSelector);
     const repositories = useSelector(repositoriesListSelector);
     const isLoading = useSelector(repositoriesLoadingSelector);
     const totalCount = useSelector(totalCountSelector);
+    const { page: pageIndex } = useParams();
 
 
     useEffect(() => {
@@ -44,7 +44,7 @@ const ResultsPage = () => {
 
     return (
         <MainLayout>
-            <Table dataSource={repositories} pagination={false}>
+            <Table dataSource={repositories} pagination={false} loading={isLoading}>
                 <Column 
                     key="fullname" 
                     title={'Fullname'} 
@@ -84,11 +84,11 @@ const ResultsPage = () => {
             </Table>
             <Space>
                 <Pagination 
-                    current={pageIndex} 
+                    current={+pageIndex} 
                     total={totalCount > 1000 ? 1000 : totalCount} 
                     pageSize={10}
                     showSizeChanger={false}  
-                    onChange={(page) => dispatch(ResultsActions.setPageIndex(page))}  
+                    onChange={(page) => navigate(routes.search(page))}  
                     disabled={isLoading}            
                 />
             </Space>
