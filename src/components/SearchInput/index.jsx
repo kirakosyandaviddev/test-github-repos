@@ -1,7 +1,6 @@
 import React from 'react';
-import { Button, Input, Space } from 'antd';
+import { Input } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { HomeFilled } from '@ant-design/icons';
 
 import { textSearchSelector } from '../../store/results/selectors';
 import { ResultsActions } from '../../store/results/actions';
@@ -28,9 +27,6 @@ const SearchInput = () => {
 
   return (
     <div className="nav-container">
-      <Button size="large" onClick={() => navigate(routes.home)}>
-       <HomeFilled />
-      </Button>
       <Search
         allowClear={true}
         placeholder="type repository name"

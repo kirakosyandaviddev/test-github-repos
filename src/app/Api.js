@@ -19,7 +19,13 @@ const Api = {
             method: 'get',
             url: `repos/${login}/${repoName}`
         })
-    }
+    },
+    getRepositoryById: (repoId) => {
+        return instance({
+            method: 'get',
+            url: `repositories/${repoId}`
+        })
+    } 
 }
 
 export default Api;

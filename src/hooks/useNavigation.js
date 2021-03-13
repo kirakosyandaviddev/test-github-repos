@@ -6,7 +6,8 @@ export const useNavigation = () => {
     const routes = {
         home: '/',
         search: (page = 1) => `/search/page=${page}`,
-        repository: (login, repoName) => `/results/${login}/${repoName}` 
+        repository: (login, repoName) => `/results/${login}/${repoName}`,
+        favorites: '/favorites'
     }
 
     const navigate = (path) => {
